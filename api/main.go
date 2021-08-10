@@ -8,10 +8,20 @@ import (
 	fiberLogger "github.com/gofiber/fiber/v2/middleware/logger"
 	"gorm.io/gorm/logger"
 	"log"
+	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
+
+var PORT = "8080"
+
+func init() {
+	port := os.Getenv("PORT")
+	if port != "" {
+		PORT = port
+	}
+}
 
 func main() {
 	app := fiber.New()
@@ -36,5 +46,5 @@ func main() {
 	}
 	loanRepository := loan.NewRepository(db)
 	handlers.SetupLoanRoutes(app, loanRepository)
-	log.Panic(app.Listen(":8080"))
+	log.Panic(app.Listen(":" + PORT))
 }
