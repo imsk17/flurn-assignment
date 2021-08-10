@@ -1,0 +1,46 @@
+### Get All Loans
+GET http://localhost:8080/loans
+Accept: application/json
+
+### Get Loans By ID (i.e. loan with `id` `1`)
+GET http://localhost:8080/loans/5
+Accept: application/json
+
+### Get Loans By Loan Amount (i.e. All Loans which have `loan_amount` greater than `56000`)
+GET http://localhost:8080/loans?loanAmountGreater=56000
+Accept: application/json
+
+### Get Loans By Loan Status (i.e. All Loans which have `status` `new`)
+GET http://localhost:8080/loans?status=rejected
+Accept: application/json
+
+### Get Loans By Loan Status And Loan Amount (i.e. All Loans which have status `new` and `loan_amount` greater than `56000`)
+GET http://localhost:8080/loans?status=rejected&loanAmountGreater=56000
+Accept: application/json
+
+### Change Loan Status To Cancelled By ID (i.e. Change Loan Status to `Rejected` which have `ID` `1`)
+DELETE http://localhost:8080/loans/1
+Accept: application/json
+
+### Change Loan Status To Cancelled By ID (i.e. Change Loan Status to `Rejected` which have `ID` `1`)
+PATCH http://localhost:8080/loans/4
+Content-Type: application/json
+Accept: application/json
+
+{
+  "status": "approved"
+}
+
+### Create a Loan Request (i.e. Change Loan Status to `Rejected` which have `ID` `1`)
+POST http://localhost:8080/loans
+Content-Type: application/json
+Accept: application/json
+
+{
+  "customerName": "Sumit Kumar",
+  "phoneNo": "8126378925",
+  "Email": "imsumitkr17@gmail.com",
+  "loanAmount": 78000,
+  "status": "new",
+  "creditScore": 750
+}

@@ -1,7 +1,10 @@
 package main
 
 import (
+	"assignment/api/handlers"
 	"assignment/pkg/entities"
+	"assignment/pkg/loan"
+	"github.com/gofiber/fiber/v2"
 	"log"
 
 	"gorm.io/driver/postgres"
@@ -9,6 +12,7 @@ import (
 )
 
 func main() {
+	app := fiber.New()
 	db, err := gorm.Open(postgres.New(
 		postgres.Config{
 			DSN: "postgres://postgres:postgres@localhost/assignment",
@@ -20,4 +24,7 @@ func main() {
 	if db.AutoMigrate(&entities.LoanRequest{}) != nil {
 		log.Panicf("Failed to migrate the database: %e", err)
 	}
+	loanRepository := loan.NewRepository(db)
+	handlers.SetupLoanRoutes(app, loanRepository)
+	log.Panic(app.Listen(":8080"))
 }
