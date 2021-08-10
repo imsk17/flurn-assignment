@@ -5,6 +5,7 @@ import (
 	"assignment/pkg/entities"
 	"assignment/pkg/loan"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"log"
 
 	"gorm.io/driver/postgres"
@@ -13,6 +14,7 @@ import (
 
 func main() {
 	app := fiber.New()
+	app.Use(logger.New())
 	db, err := gorm.Open(postgres.New(
 		postgres.Config{
 			DSN: "postgres://postgres:postgres@localhost/assignment",
