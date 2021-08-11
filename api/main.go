@@ -15,11 +15,16 @@ import (
 )
 
 var PORT = "8080"
+var DSN = "postgres://postgres:postgres@localhost/assignment"
 
 func init() {
 	port := os.Getenv("PORT")
 	if port != "" {
 		PORT = port
+	}
+	dsn := os.Getenv("DSN")
+	if dsn != "" {
+		DSN = dsn
 	}
 }
 
@@ -28,7 +33,7 @@ func main() {
 	app.Use(fiberLogger.New())
 	db, err := gorm.Open(postgres.New(
 		postgres.Config{
-			DSN: "postgres://postgres:postgres@localhost/assignment",
+			DSN: DSN,
 		},
 	), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
