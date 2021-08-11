@@ -11,27 +11,27 @@ GET http://localhost:8080/loans?loanAmountGreater=56000
 Accept: application/json
 
 ### Get Loans By Loan Status (i.e. All Loans which have `status` `new`)
-GET http://localhost:8080/loans?status=rejected
+GET http://localhost:8080/loans?status=Rejected
 Accept: application/json
 
 ### Get Loans By Loan Status And Loan Amount (i.e. All Loans which have status `new` and `loan_amount` greater than `56000`)
-GET http://localhost:8080/loans?status=rejected&loanAmountGreater=56000
+GET http://localhost:8080/loans?status=Rejected&loanAmountGreater=56000
 Accept: application/json
 
 ### Change Loan Status To Cancelled By ID (i.e. Change Loan Status to `Rejected` which have `ID` `1`)
 DELETE http://localhost:8080/loans/1
 Accept: application/json
 
-### Change Loan Status To Cancelled By ID (i.e. Change Loan Status to `Rejected` which have `ID` `1`)
+### Change Loan Status To What is in body By ID (i.e. Change Loan Status to `Approved` which have `ID` `1`)
 PATCH http://localhost:8080/loans/4
 Content-Type: application/json
 Accept: application/json
 
 {
-  "status": "approved"
+  "status": "Approved"
 }
 
-### Create a Loan Request (i.e. Change Loan Status to `Rejected` which have `ID` `1`)
+### Create a Loan Request (i.e. Insert a new loan to the database)
 POST http://localhost:8080/loans
 Content-Type: application/json
 Accept: application/json

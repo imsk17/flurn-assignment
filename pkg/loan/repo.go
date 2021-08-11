@@ -40,7 +40,7 @@ func (r *repo) Create(request entities.LoanRequest) error {
 
 func (r *repo) Read(id uint) (entities.LoanRequest, error) {
 	var req entities.LoanRequest
-	if err := r.DB.First(&req, entities.LoanRequest{Model: gorm.Model{ID: id}}).Error; err != nil {
+	if err := r.DB.First(&req, entities.LoanRequest{ID: id}).Error; err != nil {
 		log.Print(err)
 		return req, err
 	}
